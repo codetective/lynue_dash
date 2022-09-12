@@ -2,6 +2,7 @@ import {
   Box,
   Button,
   Container,
+  Flex,
   FormControl,
   FormLabel,
   Heading,
@@ -37,7 +38,9 @@ export const LoginForm = () => {
     >
       <Stack spacing="8">
         <Stack spacing="6">
-          <Logo />
+          <Flex h="100px" px="4" py="4" justify="center">
+            <Logo />
+          </Flex>
           <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
             <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
               Log in to your account
