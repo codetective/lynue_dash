@@ -24,7 +24,11 @@ export const LoginForm = () => {
     //form submission handling
     e.preventDefault();
     const { email, password } = e.target;
-    let data = { email: email.value, password: password.value };
+    let data = {
+      email: email.value,
+      password: password.value,
+      role: "superadmin",
+    };
 
     //TODO :data will be dispatched here
     dispatch(login(data));

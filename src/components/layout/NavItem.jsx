@@ -1,9 +1,12 @@
 import { Flex, Icon } from "@chakra-ui/react";
+import { Link } from "react-router-dom";
 
 const NavItem = (props) => {
-  const { icon, children, ...rest } = props;
+  const { path = "#", bg, icon, children, ...rest } = props;
   return (
     <Flex
+      as={Link}
+      to={path}
       align="center"
       px="4"
       mx="2"
@@ -11,7 +14,7 @@ const NavItem = (props) => {
       py="3"
       cursor="pointer"
       _hover={{
-        bg: "blackAlpha.200",
+        bg: bg || "blackAlpha.200",
         color: "black",
       }}
       role="group"

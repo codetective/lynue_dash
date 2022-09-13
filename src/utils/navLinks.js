@@ -3,7 +3,7 @@ import { BsGearFill } from "react-icons/bs";
 import { HiCode, HiCollection } from "react-icons/hi";
 import { FaClipboardCheck, FaRss } from "react-icons/fa";
 
-const admin_nav_links = [
+const super_admin_nav_links = [
   {
     path: "/",
     name: "Home",
@@ -37,7 +37,7 @@ const admin_nav_links = [
 ];
 const blog_nav_links = [
   {
-    path: "/",
+    path: "/blog",
     name: "Home",
     icon: MdHome,
   },
@@ -58,6 +58,6 @@ const blog_nav_links = [
   },
 ];
 
-const navLinks = { admin_nav_links, blog_nav_links };
+const navLinks = { super_admin_nav_links, blog_nav_links };
 
 export default navLinks;

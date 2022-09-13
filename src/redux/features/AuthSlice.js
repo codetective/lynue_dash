@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   isAuth: false,
-  user: {},
+  user: { role: "blog" },
 };
 
 //TODO : replace reducers with createasyncthunk api calls
