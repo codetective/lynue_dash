@@ -4,8 +4,9 @@ To edit or run locally, follow the steps :
 
 1.  clone the repo
     - `git clone https://github.com/Lynue-com/admin-frontend.git`
-2.  Inside the project folder, run `npm start` or `yarn start` depending on preference.
-3.  open [http://localhost:3000](http://localhost:3000) to view it in your browser.
+2.  Inside the project folder, run `npm install` or `yarn` to install dependencies.
+3.  run `npm start` or `yarn start` to start development server
+4.  open [http://localhost:3000](http://localhost:3000) to view it in your browser.
 
 ## to build for production
 
