@@ -1,7 +1,8 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Box } from "@chakra-ui/react";
+import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Logo } from "../Logo";
 
 export { PrivateRoute };
 
@@ -24,8 +25,11 @@ function PrivateRoute({ children }) {
   }
 
   return (
-    <Box lineHeight={"100vh"} textAlign="center">
-      loading...
-    </Box>
+    <Center h="100vh" flexDir="column">
+      <Logo />
+      <Box>
+        <Spinner />
+      </Box>
+    </Center>
   );
 }

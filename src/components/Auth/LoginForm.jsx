@@ -12,12 +12,15 @@ import {
   useBreakpointValue,
 } from "@chakra-ui/react";
 import * as React from "react";
-import { useDispatch } from "react-redux";
-import { login } from "../../redux/features/AuthSlice";
+import { useDispatch, useSelector } from "react-redux";
+// import { login } from "../../redux/features/AuthSlice";
+import { signin } from "../../redux/functions/authFuctions";
 import { Logo } from "../Logo";
 import { PasswordField } from "./PasswordField";
 
-export const LoginForm = () => {
+const LoginForm = ({ as }) => {
+  const { loading } = useSelector((state) => state.auth);
+  console.log(loading);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {
@@ -27,11 +30,10 @@ export const LoginForm = () => {
     let data = {
       email: email.value,
       password: password.value,
-      role: "superadmin",
+      role: as,
     };
 
-    //TODO :data will be dispatched here
-    dispatch(login(data));
+    dispatch(signin(data));
   };
 
   return (
@@ -47,7 +49,7 @@ export const LoginForm = () => {
           </Flex>
           <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
             <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-              Log in to your account
+              Login as {as}
             </Heading>
           </Stack>
         </Stack>
@@ -76,7 +78,7 @@ export const LoginForm = () => {
               </Button>
             </HStack>
             <Stack spacing="6">
-              <Button type="submit" colorScheme="blue">
+              <Button isLoading={loading} type="submit" colorScheme="blue">
                 Sign in
               </Button>
             </Stack>
@@ -86,3 +88,5 @@ export const LoginForm = () => {
     </Container>
   );
 };
+
+export default LoginForm;

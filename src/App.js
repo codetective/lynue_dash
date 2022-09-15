@@ -1,41 +1,25 @@
 import { ChakraProvider } from "@chakra-ui/react";
 import { Route, Routes } from "react-router-dom";
 import appTheme from "./utils/apptheme";
-import { useEffect } from "react";
-import { useDispatch } from "react-redux";
-import { checkAuthState } from "./redux/features/AuthSlice";
 import BlogDashBoard from "./pages/BlogDashBoard";
-import HomePage from "./pages/Home";
 import SuperAdminDashBoard from "./pages/SuperAdminDashBoard";
-import { PrivateRoute } from "./components/Auth/PrivateRoute";
+import WelcomePage from "./pages/WelcomePage";
+import SupportDashBoard from "./pages/SupportDashBoard";
+import ModeratorDashBoard from "./pages/ModeratorDashBoard";
+import AdminDashBoard from "./pages/AdminDashBoard";
+import AnalystDashBoard from "./pages/AnalystDashBoard";
 
 function App() {
-  const dispatch = useDispatch();
-
-  useEffect(() => {
-    dispatch(checkAuthState());
-  }, [dispatch]);
-
   return (
     <ChakraProvider theme={appTheme}>
       <Routes>
-        <Route path="/" element={<HomePage />}></Route>
-        <Route
-          path="/blog/*"
-          element={
-            <PrivateRoute>
-              <BlogDashBoard />
-            </PrivateRoute>
-          }
-        ></Route>
-        <Route
-          path="/superadmin/*"
-          element={
-            <PrivateRoute>
-              <SuperAdminDashBoard />
-            </PrivateRoute>
-          }
-        ></Route>
+        <Route path="/" element={<WelcomePage />}></Route>
+        <Route path="/blog/*" element={<BlogDashBoard />}></Route>
+        <Route path="/superadmin/*" element={<SuperAdminDashBoard />}></Route>
+        <Route path="/analyst/*" element={<AnalystDashBoard />}></Route>
+        <Route path="/admin/*" element={<AdminDashBoard />}></Route>
+        <Route path="/support/*" element={<SupportDashBoard />}></Route>
+        <Route path="/moderator/*" element={<ModeratorDashBoard />}></Route>
       </Routes>
     </ChakraProvider>
   );

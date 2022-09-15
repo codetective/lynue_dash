@@ -5,18 +5,20 @@ import { useSelector } from "react-redux";
 import LoginForm from "../components/Auth/LoginForm";
 import { roles } from "../utils/config";
 
-function BlogDashBoard() {
+function ModeratorDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
-  return <>{!isAuth ? <LoginForm as={roles.blog.title} /> : <Main />}</>;
+  return <>{!isAuth ? <LoginForm as={roles.moderator.title} /> : <Main />}</>;
 }
 
-export default BlogDashBoard;
+export default ModeratorDashBoard;
 
 function Main() {
-  //if user role is blog
   return (
-    <DashBoardLayout baseUrl={"/blog"} navLinks={navLinks.blog_admin_nav_links}>
-      blog
+    <DashBoardLayout
+      baseUrl={"/moderator"}
+      navLinks={navLinks.moderator_nav_links}
+    >
+      moderator
     </DashBoardLayout>
   );
 }
