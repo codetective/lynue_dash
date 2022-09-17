@@ -69,6 +69,7 @@ function DashBoardLayout({ navLinks, baseUrl, children }) {
               aria-label="notification icon"
               icon={<FaBell />}
               colorScheme="blue"
+              size="sm"
             />
             <IconButton
               display={["none", "flex", "flex"]}
@@ -79,6 +80,7 @@ function DashBoardLayout({ navLinks, baseUrl, children }) {
               icon={colorMode === "light" ? <FaMoon /> : <FaSun />}
               onClick={toggleColorMode}
               colorScheme="blue"
+              size="sm"
             />
             <Avatar
               ml="4"
