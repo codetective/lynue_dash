@@ -35,6 +35,7 @@ export default function MobileMenu({ menuItems, baseUrl }) {
 
           <DrawerBody px="0">
             <SidebarContent
+              closeMobileMenu={onClose}
               baseUrl={baseUrl}
               menuItems={menuItems}
               w="full"

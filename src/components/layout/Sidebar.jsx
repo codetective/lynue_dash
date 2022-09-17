@@ -5,7 +5,14 @@ import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/features/AuthSlice";
 
-const SidebarContent = ({ menuItems, withoutLogo, pos, baseUrl, ...rest }) => {
+const SidebarContent = ({
+  menuItems,
+  closeMobileMenu,
+  withoutLogo,
+  pos,
+  baseUrl,
+  ...rest
+}) => {
   const dispatch = useDispatch();
   const bg = useColorModeValue("white", "gray.900");
   return (
@@ -39,7 +46,12 @@ const SidebarContent = ({ menuItems, withoutLogo, pos, baseUrl, ...rest }) => {
         pt="4"
       >
         {menuItems?.map((link, index) => (
-          <NavItem path={link.path} icon={link.icon} key={index}>
+          <NavItem
+            path={link.path}
+            icon={link.icon}
+            closeMobileMenu={closeMobileMenu}
+            key={index}
+          >
             {link.name}
           </NavItem>
         ))}

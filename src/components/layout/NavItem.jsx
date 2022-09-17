@@ -2,7 +2,7 @@ import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
 import { Link } from "react-router-dom";
 
 const NavItem = (props) => {
-  const { path = "#", bg, icon, children, ...rest } = props;
+  const { path = "#", bg, closeMobileMenu, icon, children, ...rest } = props;
   return (
     <Flex
       as={Link}
@@ -20,6 +20,15 @@ const NavItem = (props) => {
       role="group"
       fontWeight="semibold"
       transition=".15s ease"
+      onClick={
+        closeMobileMenu
+          ? (e) => {
+              if (e.target.tagName === "A") {
+                closeMobileMenu();
+              }
+            }
+          : null
+      }
       {...rest}
     >
       {icon && (
