@@ -1,14 +1,11 @@
-export const BASE_API_URL = "http://localhost:5000";
+export const API_HOSTNAME = "http://localhost:5000";
 
-export const AUTH_API = (role) => {
-  let links = {
-    login: `${BASE_API_URL}/${role}/login`,
-    signup: `${BASE_API_URL}/${role}/signup`,
-    reset_password: `${BASE_API_URL}/${role}/reset_password`,
-    new_password: `${BASE_API_URL}/${role}/new_password`,
-    forgot_password: `${BASE_API_URL}/${role}/forgot_password`,
-  };
-  return links;
+export const AUTH_API = {
+  login: `${API_HOSTNAME}/auth/login`,
+  signup: `${API_HOSTNAME}/auth/signup`,
+  reset_password: `${API_HOSTNAME}/auth/reset_password`,
+  new_password: `${API_HOSTNAME}/auth/new_password`,
+  forgot_password: `${API_HOSTNAME}/auth/forgot_password`,
 };
 
 export const roles = {
@@ -16,7 +13,7 @@ export const roles = {
     title: "superAdmin",
     path: "/superadmin",
   },
-  adin: {
+  admin: {
     title: "admin",
     path: "/admin",
   },
@@ -24,12 +21,24 @@ export const roles = {
     title: "analyst",
     path: "/analyst",
   },
-  moderator: {
-    title: "moderator",
-    path: "/moderator",
+  blog: {
+    title: "blog",
+    path: "/blog",
   },
   support: {
     title: "support",
     path: "/support",
   },
+};
+
+export const PAGETITLE = (baseUrl, pathname) => {
+  switch (pathname) {
+    case baseUrl:
+      return "Overview";
+
+    case baseUrl + "/settings":
+      return "Settings";
+    default:
+      return "Dashboard";
+  }
 };

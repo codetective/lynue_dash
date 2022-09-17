@@ -21,7 +21,7 @@ export const signin = createAsyncThunk(
   async (data, { rejectWithValue }) => {
     let { email, password } = data;
     try {
-      let res = await axios.post(AUTH_API(data.role).login, {
+      let res = await axios.post(AUTH_API.login, {
         email,
         password,
       });

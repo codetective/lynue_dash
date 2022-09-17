@@ -7,6 +7,8 @@ import { BrowserRouter } from "react-router-dom";
 import { Provider } from "react-redux";
 import { store, persistor } from "./redux/store";
 import { PersistGate } from "redux-persist/integration/react";
+import { ColorModeScript } from "@chakra-ui/react";
+import appTheme from "./utils/apptheme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
@@ -14,6 +16,9 @@ root.render(
     <BrowserRouter>
       <Provider store={store}>
         <PersistGate loading={<h1>loading..</h1>} persistor={persistor}>
+          <ColorModeScript
+            initialColorMode={appTheme.config.initialColorMode}
+          />
           <App />
         </PersistGate>
       </Provider>

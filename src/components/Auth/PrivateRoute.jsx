@@ -1,13 +1,14 @@
 import { Navigate } from "react-router-dom";
 import { useSelector } from "react-redux";
 import { useEffect, useState } from "react";
-import { Box, Center, Spinner } from "@chakra-ui/react";
+import { Box, Center, Spinner, useToast } from "@chakra-ui/react";
 import { Logo } from "../Logo";
+import { roles } from "../../utils/config";
 
-export { PrivateRoute };
+export default function PrivateRoute({ onlyFor, children }) {
+  const toast = useToast();
 
-function PrivateRoute({ children }) {
-  const { isAuth } = useSelector((state) => state.auth);
+  const { isAuth, user } = useSelector((state) => state.auth);
   const [loading, setLoading] = useState("true");
   useEffect(() => {
     setTimeout(() => {
@@ -16,12 +17,19 @@ function PrivateRoute({ children }) {
   }, []);
 
   if (!isAuth && !loading) {
-    // not logged in so redirect to login page with the return url
     return <Navigate to="/" />;
   }
-  if (isAuth && !loading) {
-    // not logged in so redirect to login page with the return url
+  if (isAuth && !loading && user.role === onlyFor) {
     return children;
+  }
+  if (isAuth && !loading && user.role !== onlyFor) {
+    toast({
+      status: "info",
+      title: `You're logged in as ${user.role}`,
+      description: "Redirected...",
+      position: "bottom-right",
+    });
+    return <Navigate to={roles[user.role].path} />;
   }
 
   return (

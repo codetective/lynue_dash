@@ -14,32 +14,32 @@ const super_admin_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/posts",
+    path: "/superadmin/posts",
     name: "Posts",
     icon: FaRss,
   },
   {
-    path: "/users",
+    path: "/superadmin/users",
     name: "Users",
     icon: HiCollection,
   },
   {
-    path: "/listings",
+    path: "/superadmin/listings",
     name: "Listings",
     icon: FaClipboardCheck,
   },
   {
-    path: "/tickets",
+    path: "/superadmin/tickets",
     name: "Tickets",
     icon: HiCode,
   },
   {
-    path: "/messages",
+    path: "/superadmin/messages",
     name: "Messages",
     icon: TiMessages,
   },
   {
-    path: "/settings",
+    path: "/superadmin/settings",
     name: "Settings",
     icon: BsGearFill,
   },
@@ -51,22 +51,22 @@ const blog_admin_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/create",
+    path: "/blog/create",
     name: "Create Post",
     icon: MdCreate,
   },
   {
-    path: "/posts",
+    path: "/blog/posts",
     name: "Posts",
     icon: FaRss,
   },
   {
-    path: "/categories",
+    path: "/blog/categories",
     name: "Categories",
     icon: BiCategoryAlt,
   },
   {
-    path: "/settings",
+    path: "/blog/settings",
     name: "Settings",
     icon: BsGearFill,
   },
@@ -74,22 +74,22 @@ const blog_admin_nav_links = [
 
 const analyst_nav_links = [
   {
-    path: "/blog",
+    path: "/analyst",
     name: "Home",
     icon: MdHome,
   },
   {
-    path: "/articles",
+    path: "/analyst/articles",
     name: "Articles",
     icon: FaRss,
   },
   {
-    path: "/collection",
+    path: "/analyst/collection",
     name: "Collection",
     icon: HiCollection,
   },
   {
-    path: "/settings",
+    path: "/analyst/settings",
     name: "Settings",
     icon: BsGearFill,
   },
@@ -102,17 +102,17 @@ const support_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/tickets",
+    path: "/support/tickets",
     name: "Tickets",
     icon: HiOutlineTicket,
   },
   {
-    path: "/open",
+    path: "/support/open",
     name: "Open Tickets",
     icon: RiQuestionnaireLine,
   },
   {
-    path: "/messages",
+    path: "/support/messages",
     name: "Messages",
     icon: TiMessages,
   },
@@ -125,17 +125,17 @@ const admin_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/articles",
+    path: "/admin/articles",
     name: "Articles",
     icon: FaRss,
   },
   {
-    path: "/collection",
+    path: "/admin/collection",
     name: "Collection",
     icon: HiCollection,
   },
   {
-    path: "/settings",
+    path: "/admin/settings",
     name: "Settings",
     icon: BsGearFill,
   },

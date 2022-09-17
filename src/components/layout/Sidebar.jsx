@@ -1,4 +1,4 @@
-import { Box, Flex } from "@chakra-ui/react";
+import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
 import { Logo } from "../Logo";
 import NavItem from "./NavItem";
 import { FiLogOut } from "react-icons/fi";
@@ -7,6 +7,7 @@ import { logout } from "../../redux/features/AuthSlice";
 
 const SidebarContent = ({ menuItems, withoutLogo, pos, baseUrl, ...rest }) => {
   const dispatch = useDispatch();
+  const bg = useColorModeValue("white", "gray.900");
   return (
     <Box
       as="nav"
@@ -18,14 +19,14 @@ const SidebarContent = ({ menuItems, withoutLogo, pos, baseUrl, ...rest }) => {
       pb="10"
       overflowX="hidden"
       overflowY="auto"
-      bg="white"
+      bg={bg}
       borderColor="blackAlpha.300"
       borderRightWidth="1px"
       w="60"
       {...rest}
     >
       {!withoutLogo && (
-        <Flex h="100px" px="4" py="4" justify="center" bg="gray.50">
+        <Flex h="100px" px="4" py="4" justify="center" bg={bg}>
           <Logo baseUrl={baseUrl} />
         </Flex>
       )}
@@ -33,7 +34,7 @@ const SidebarContent = ({ menuItems, withoutLogo, pos, baseUrl, ...rest }) => {
         direction="column"
         as="nav"
         fontSize="sm"
-        color="gray.800"
+        color={useColorModeValue("gray.900", "gray.200")}
         aria-label="Main Navigation"
         pt="4"
       >

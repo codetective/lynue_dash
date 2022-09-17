@@ -10,15 +10,17 @@ import {
   Input,
   Stack,
   useBreakpointValue,
+  useColorModeValue,
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { login } from "../../redux/features/AuthSlice";
 // import { login } from "../../redux/features/AuthSlice";
-import { signin } from "../../redux/functions/authFuctions";
+// import { signin } from "../../redux/functions/authFuctions";
 import { Logo } from "../Logo";
 import { PasswordField } from "./PasswordField";
 
-const LoginForm = ({ as }) => {
+const LoginForm = () => {
   const { loading } = useSelector((state) => state.auth);
   console.log(loading);
   const dispatch = useDispatch();
@@ -30,10 +32,11 @@ const LoginForm = ({ as }) => {
     let data = {
       email: email.value,
       password: password.value,
-      role: as,
+      name: "John Doe",
+      role: "superAdmin",
     };
 
-    dispatch(signin(data));
+    dispatch(login(data));
   };
 
   return (
@@ -49,14 +52,14 @@ const LoginForm = ({ as }) => {
           </Flex>
           <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
             <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-              Login as {as}
+              Welcome admin, enter your details to log in.
             </Heading>
           </Stack>
         </Stack>
         <Box
           py={{ base: "5", sm: "8" }}
           px={{ base: "4", sm: "10" }}
-          bg={"white"}
+          bg={useColorModeValue("white", "gray.900")}
           boxShadow={{ base: "none", sm: "md" }}
           borderRadius={{ base: "sm", sm: "xl" }}
           as="form"

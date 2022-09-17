@@ -9,13 +9,11 @@ import {
 
 const initialState = {
   isAuth: false,
-  user: { role: "blog" },
+  user: { role: "superAdmin" },
   success: false,
   loading: false,
   error: "",
 };
-
-//TODO : replace reducers with createasyncthunk api calls
 
 export const AuthSlice = createSlice({
   name: "auth",
