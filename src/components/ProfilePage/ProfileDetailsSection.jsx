@@ -6,7 +6,7 @@ import SectionHeading from "../DashBoard/SectionHeading";
 function ProfileDetailsSection() {
   return (
     <CustomBox flex="2" mr={[0, 0, 5]}>
-      <SectionHeading fontWeight="semibold" fontSize="sm">
+      <SectionHeading fontWeight="semibold" fontSize="md">
         Profile Details
       </SectionHeading>
       <Stack as="form" pt="10" spacing="5">
