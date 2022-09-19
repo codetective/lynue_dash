@@ -5,7 +5,7 @@ import { TiMessages } from "react-icons/ti";
 import { BsGearFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { HiCode, HiCollection, HiOutlineTicket } from "react-icons/hi";
-import { FaClipboardCheck, FaRss } from "react-icons/fa";
+import { FaClipboardCheck, FaRss, FaUserTie } from "react-icons/fa";
 
 const super_admin_nav_links = [
   {
@@ -14,9 +14,9 @@ const super_admin_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/superadmin/posts",
-    name: "Posts",
-    icon: FaRss,
+    path: "/superadmin/admins",
+    name: "Admins",
+    icon: FaUserTie,
   },
   {
     path: "/superadmin/users",
