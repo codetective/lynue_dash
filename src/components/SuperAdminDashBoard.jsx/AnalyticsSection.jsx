@@ -43,12 +43,15 @@ function AnalyticsSection(props) {
     <Box
       {...props}
       px="5"
+      pb="5"
       bg={useColorModeValue("white", "gray.800")}
       shadow="base"
     >
       <Box as="header" py="4">
         <SimpleGrid columns={[1, 2]} spacing="5">
-          <SectionHeading>Analytics Overview</SectionHeading>
+          <SectionHeading fontWeight="semibold">
+            Analytics Overview
+          </SectionHeading>
           <Stack {...getRootProps()}>
             <HStack justify={["flex-start", "flex-end"]}>
               {timeStamps.map((timeStamp) => {

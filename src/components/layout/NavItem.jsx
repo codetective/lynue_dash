@@ -1,12 +1,17 @@
 import { Flex, Icon, useColorModeValue } from "@chakra-ui/react";
-import { Link } from "react-router-dom";
+import { NavLink } from "react-router-dom";
 
 const NavItem = (props) => {
   const { path = "#", bg, closeMobileMenu, icon, children, ...rest } = props;
+  let activeStyle = {
+    background: "#00000014",
+  };
   return (
     <Flex
-      as={Link}
+      style={({ isActive }) => (isActive ? activeStyle : undefined)}
+      as={NavLink}
       to={path}
+      end
       align="center"
       px="4"
       mx="2"

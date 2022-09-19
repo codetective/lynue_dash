@@ -8,3 +8,7 @@ body:not(.chakra-ui-dark){
   background-color: #f1f2f2 !important;
 
 }
+
+a.active > svg{
+  color: #3182ce;
+}

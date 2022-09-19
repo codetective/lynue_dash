@@ -6,6 +6,7 @@ import LoginForm from "../components/Auth/LoginForm";
 import { roles } from "../utils/config";
 import { Route, Routes } from "react-router-dom";
 import Overview from "../components/SuperAdminDashBoard.jsx/Overview";
+import Profile from "../components/ProfilePage/Profile";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -21,7 +22,8 @@ function Main() {
       navLinks={navLinks.super_admin_nav_links}
     >
       <Routes>
-        <Route path="/" element={<Overview />}></Route>
+        <Route exact path="/" element={<Overview />}></Route>
+        <Route path="/profile" element={<Profile />}></Route>
       </Routes>
     </DashBoardLayout>
   );

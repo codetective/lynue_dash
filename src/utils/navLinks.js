@@ -5,7 +5,12 @@ import { TiMessages } from "react-icons/ti";
 import { BsGearFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { HiCode, HiCollection, HiOutlineTicket } from "react-icons/hi";
-import { FaClipboardCheck, FaRss, FaUserTie } from "react-icons/fa";
+import {
+  FaClipboardCheck,
+  FaRss,
+  FaUserCircle,
+  FaUserTie,
+} from "react-icons/fa";
 
 const super_admin_nav_links = [
   {
@@ -43,6 +48,11 @@ const super_admin_nav_links = [
     name: "Settings",
     icon: BsGearFill,
   },
+  {
+    path: "/superadmin/profile",
+    name: "Profile",
+    icon: FaUserCircle,
+  },
 ];
 const blog_admin_nav_links = [
   {
@@ -70,6 +80,11 @@ const blog_admin_nav_links = [
     name: "Settings",
     icon: BsGearFill,
   },
+  {
+    path: "/superadmin/profile",
+    name: "Profile",
+    icon: FaUserCircle,
+  },
 ];
 
 const analyst_nav_links = [
@@ -92,6 +107,11 @@ const analyst_nav_links = [
     path: "/analyst/settings",
     name: "Settings",
     icon: BsGearFill,
+  },
+  {
+    path: "/superadmin/profile",
+    name: "Profile",
+    icon: FaUserCircle,
   },
 ];
 
@@ -116,6 +136,11 @@ const support_nav_links = [
     name: "Messages",
     icon: TiMessages,
   },
+  {
+    path: "/superadmin/profile",
+    name: "Profile",
+    icon: FaUserCircle,
+  },
 ];
 
 const admin_nav_links = [
@@ -138,6 +163,11 @@ const admin_nav_links = [
     path: "/admin/settings",
     name: "Settings",
     icon: BsGearFill,
+  },
+  {
+    path: "/superadmin/profile",
+    name: "Profile",
+    icon: FaUserCircle,
   },
 ];
 

@@ -59,6 +59,7 @@ const SidebarContent = ({
           onClick={() => dispatch(logout())}
           bg="red.200"
           icon={FiLogOut}
+          to={"/"}
         >
           Logout
         </NavItem>

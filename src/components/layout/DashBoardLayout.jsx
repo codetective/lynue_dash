@@ -11,7 +11,7 @@ import {
 } from "@chakra-ui/react";
 import React from "react";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
-import { useLocation } from "react-router-dom";
+import { Link, useLocation } from "react-router-dom";
 import { PAGETITLE } from "../../utils/config";
 import { Logo } from "../Logo";
 import MobileMenu from "./MobileMenu";
@@ -83,6 +83,8 @@ function DashBoardLayout({ navLinks, baseUrl, children }) {
               size="sm"
             />
             <Avatar
+              as={Link}
+              to={baseUrl + "/profile"}
               ml="4"
               size="sm"
               name="anubra266"

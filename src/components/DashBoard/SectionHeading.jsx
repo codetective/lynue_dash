@@ -1,4 +1,4 @@
-import { Flex, Heading } from "@chakra-ui/react";
+import { Flex, Text } from "@chakra-ui/react";
 import React from "react";
 
 function SectionHeading({
@@ -9,9 +9,9 @@ function SectionHeading({
 }) {
   return (
     <Flex align={"center"}>
-      <Heading as="h3" {...rest} fontSize={fontSize}>
+      <Text as="h3" {...rest} fontSize={fontSize}>
         {children}
-      </Heading>
+      </Text>
     </Flex>
   );
 }
