@@ -38,6 +38,10 @@ export const PAGETITLE = (baseUrl, pathname) => {
 
     case baseUrl + "/settings":
       return "Settings";
+    case baseUrl + "/profile":
+      return "Profile";
+    case baseUrl + "/complaints":
+      return "Complaints";
     default:
       return "Dashboard";
   }

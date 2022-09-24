@@ -7,6 +7,8 @@ import { roles } from "../utils/config";
 import { Route, Routes } from "react-router-dom";
 import Overview from "../components/SuperAdminDashBoard.jsx/Overview";
 import Profile from "../components/ProfilePage/Profile";
+import Complaints from "../components/ComplaintsPage/Complaints";
+import SingleComplaintView from "./SingleComplaintView";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -24,6 +26,14 @@ function Main() {
       <Routes>
         <Route exact path="/" element={<Overview />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/complaints"
+          element={<Complaints baseUrl="/superadmin" />}
+        ></Route>
+        <Route
+          path="/complaints/:ticket"
+          element={<SingleComplaintView baseUrl={"/superadmin"} />}
+        ></Route>
       </Routes>
     </DashBoardLayout>
   );

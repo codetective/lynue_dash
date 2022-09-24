@@ -4,7 +4,8 @@ import { RiQuestionnaireLine } from "react-icons/ri";
 import { TiMessages } from "react-icons/ti";
 import { BsGearFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
-import { HiCode, HiCollection, HiOutlineTicket } from "react-icons/hi";
+import { GoIssueOpened } from "react-icons/go";
+import { HiCollection } from "react-icons/hi";
 import {
   FaClipboardCheck,
   FaRss,
@@ -34,9 +35,9 @@ const super_admin_nav_links = [
     icon: FaClipboardCheck,
   },
   {
-    path: "/superadmin/tickets",
-    name: "Tickets",
-    icon: HiCode,
+    path: "/superadmin/complaints",
+    name: "Complaints",
+    icon: GoIssueOpened,
   },
   {
     path: "/superadmin/messages",
@@ -122,9 +123,9 @@ const support_nav_links = [
     icon: MdHome,
   },
   {
-    path: "/support/tickets",
-    name: "Tickets",
-    icon: HiOutlineTicket,
+    path: "/support/complaints",
+    name: "Complaints",
+    icon: GoIssueOpened,
   },
   {
     path: "/support/open",

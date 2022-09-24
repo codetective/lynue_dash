@@ -57,9 +57,7 @@ function ProfileDetailsSection() {
           <FormLabel>What's your gender?</FormLabel>
 
           <Select name="gender">
-            <option value={null} disabled selected>
-              Select gender
-            </option>
+            <option value={null}>Select gender</option>
             <option value="female">Female</option>
             <option value="male">Male</option>
           </Select>
