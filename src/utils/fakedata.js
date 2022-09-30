@@ -40,5 +40,25 @@ const sampleTransactions = [
     amount: "4523.00",
   },
 ];
+const sampleUsers = [
+  {
+    id: "444433",
+    name: "John Doe",
+    role: "admin",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    id: "444533",
+    name: "Jane Doe",
+    role: "blogger",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+  {
+    id: "494433",
+    name: "Janet Doe",
+    role: "analyst",
+    image: "https://randomuser.me/api/portraits/women/44.jpg",
+  },
+];
 
-export { sampleTicketsData, sampleTransactions };
+export { sampleTicketsData, sampleTransactions, sampleUsers };

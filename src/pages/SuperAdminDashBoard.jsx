@@ -10,6 +10,8 @@ import Profile from "../components/ProfilePage/Profile";
 import Complaints from "../components/ComplaintsPage/Complaints";
 import SingleComplaintView from "../components/ComplaintsPage/SingleComplaintView";
 import Transactions from "../components/TransactionsPage/Transactions";
+import Settings from "../components/SettingsPage/Settings";
+import Users from "../components/UsersPage/Users";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -27,6 +29,7 @@ function Main() {
       <Routes>
         <Route exact path="/" element={<Overview />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route path="/users" element={<Users />}></Route>
         <Route
           path="/transactions"
           element={<Transactions baseUrl={"/superadmin"} />}
@@ -34,6 +37,10 @@ function Main() {
         <Route
           path="/complaints"
           element={<Complaints baseUrl="/superadmin" />}
+        ></Route>
+        <Route
+          path="/settings"
+          element={<Settings baseUrl="/superadmin" />}
         ></Route>
         <Route
           path="/complaints/:ticketID"

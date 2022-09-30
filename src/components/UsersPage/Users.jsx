@@ -2,10 +2,10 @@ import { Box, Divider, HStack, Select } from "@chakra-ui/react";
 import React, { useState } from "react";
 import SectionHeading from "../DashBoard/SectionHeading";
 import CustomBox from "../DashBoard/CustomBox";
-import TransactionsTable from "./TranscationsTable";
-import { sampleTransactions } from "../../utils/fakedata";
+import UsersTable from "./UsersTable";
+import { sampleUsers } from "../../utils/fakedata";
 
-function Transactions({ baseUrl }) {
+function Users({ baseUrl }) {
   const [type, setType] = useState("all");
 
   return (
@@ -14,10 +14,10 @@ function Transactions({ baseUrl }) {
         <SectionHeading fontWeight="semibold" fontSize={["md", "lg", "xl"]}>
           {" "}
           {type === "all" ? (
-            "TRANSACTION HISTORY"
+            "USERS"
           ) : (
             <Box as="span" textTransform={"uppercase"}>
-              {type} Transactions
+              {type} USERS
             </Box>
           )}
         </SectionHeading>
@@ -29,20 +29,17 @@ function Transactions({ baseUrl }) {
           <Box>
             <Select size="sm" onChange={(e) => setType(e.target.value)}>
               <option value="all">All</option>
-              <option value="recent">Recent</option>
-              <option value="completed">Completed</option>
-              <option value="pending">Pending</option>
-              <option value="declined">Declined</option>
+              <option value="admin">Admin Users</option>
+              <option value="blogger">Bloggers</option>
+              <option value="support">Support</option>
+              <option value="analyst">Analysts</option>
             </Select>
           </Box>
         </HStack>
       </CustomBox>
-      <TransactionsTable
-        transactionData={sampleTransactions}
-        baseUrl={baseUrl}
-      />
+      <UsersTable usersData={sampleUsers} baseUrl={baseUrl} />
     </Box>
   );
 }
 
-export default Transactions;
+export default Users;
