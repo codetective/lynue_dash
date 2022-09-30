@@ -2,6 +2,7 @@ import { MdHome, MdCreate } from "react-icons/md";
 import { RiQuestionnaireLine } from "react-icons/ri";
 
 import { TiMessages } from "react-icons/ti";
+import { AiOutlineTransaction } from "react-icons/ai";
 import { BsGearFill } from "react-icons/bs";
 import { BiCategoryAlt } from "react-icons/bi";
 import { GoIssueOpened } from "react-icons/go";
@@ -28,6 +29,11 @@ const super_admin_nav_links = [
     path: "/superadmin/users",
     name: "Users",
     icon: HiCollection,
+  },
+  {
+    path: "/superadmin/transactions",
+    name: "Transactions",
+    icon: AiOutlineTransaction,
   },
   {
     path: "/superadmin/listings",

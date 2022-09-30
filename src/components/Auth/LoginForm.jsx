@@ -22,7 +22,6 @@ import { PasswordField } from "./PasswordField";
 
 const LoginForm = () => {
   const { loading } = useSelector((state) => state.auth);
-  console.log(loading);
   const dispatch = useDispatch();
 
   const handleSubmit = (e) => {

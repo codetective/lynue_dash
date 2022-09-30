@@ -13,28 +13,7 @@ import { FaThumbsUp } from "react-icons/fa";
 import ComplaintsMetrics from "./ComplaintsMetrics";
 import SectionHeading from "../DashBoard/SectionHeading";
 import ComplaintsTable from "./COmplaintsTable";
-
-let sampleData = [
-  {
-    id: "UAC876543",
-    priority: "low",
-    status: "pending",
-    date: "23/6/2022 12:43PM",
-  },
-
-  {
-    id: "UAC876543",
-    priority: "high",
-    status: "pending",
-    date: "23/6/2022 12:43PM",
-  },
-  {
-    id: "UAC876543",
-    priority: "mmedium",
-    status: "resolved",
-    date: "23/6/2022 12:43PM",
-  },
-];
+import { sampleTicketsData } from "../../utils/fakedata";
 
 function Complaints({ baseUrl }) {
   const [type, setType] = useState("all");
@@ -86,7 +65,7 @@ function Complaints({ baseUrl }) {
           </HStack>
         </CustomBox>
 
-        <ComplaintsTable baseUrl={baseUrl} complaintsData={sampleData} />
+        <ComplaintsTable baseUrl={baseUrl} complaintsData={sampleTicketsData} />
       </Box>
     </Stack>
   );

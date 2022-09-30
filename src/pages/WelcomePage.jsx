@@ -6,7 +6,6 @@ import { roles } from "../utils/config";
 
 function WelcomePage() {
   const { isAuth, user } = useSelector((s) => s.auth);
-  console.log(user);
   return (
     <>
       {!isAuth ? (
