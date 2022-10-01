@@ -70,6 +70,8 @@ function DashBoardLayout({ navLinks, baseUrl, children }) {
               icon={<FaBell />}
               colorScheme="blue"
               size="sm"
+              as={Link}
+              to={baseUrl + "/notifications"}
             />
             <IconButton
               display={["none", "flex", "flex"]}

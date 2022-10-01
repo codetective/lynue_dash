@@ -1,7 +1,7 @@
 import React from "react";
 import navLinks from "../utils/navLinks";
 import DashBoardLayout from "../components/layout/DashBoardLayout";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import LoginForm from "../components/Auth/LoginForm";
 import { roles } from "../utils/config";
 import { Route, Routes } from "react-router-dom";
@@ -12,6 +12,9 @@ import SingleComplaintView from "../components/ComplaintsPage/SingleComplaintVie
 import Transactions from "../components/TransactionsPage/Transactions";
 import Settings from "../components/SettingsPage/Settings";
 import Users from "../components/UsersPage/Users";
+import Notifications from "../components/NotificationsPage/Notifications";
+import { useEffect } from "react";
+import { getNotifs } from "../redux/functions/notificationFunctions";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -21,9 +24,14 @@ function SuperAdminDashBoard() {
 export default SuperAdminDashBoard;
 
 function Main() {
+  const baseUrl = "/superadmin";
+  const dispatch = useDispatch();
+  useEffect(() => {
+    dispatch(getNotifs());
+  }, [dispatch]);
   return (
     <DashBoardLayout
-      baseUrl={"/superadmin"}
+      baseUrl={baseUrl}
       navLinks={navLinks.super_admin_nav_links}
     >
       <Routes>
@@ -31,20 +39,25 @@ function Main() {
         <Route path="/profile" element={<Profile />}></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route
+          path="/notifications"
+          element={<Notifications baseUrl={baseUrl} />}
+        ></Route>
+
+        <Route
           path="/transactions"
-          element={<Transactions baseUrl={"/superadmin"} />}
+          element={<Transactions baseUrl={baseUrl} />}
         ></Route>
         <Route
           path="/complaints"
-          element={<Complaints baseUrl="/superadmin" />}
+          element={<Complaints baseUrl={baseUrl} />}
         ></Route>
         <Route
           path="/settings"
-          element={<Settings baseUrl="/superadmin" />}
+          element={<Settings baseUrl={baseUrl} />}
         ></Route>
         <Route
           path="/complaints/:ticketID"
-          element={<SingleComplaintView baseUrl={"/superadmin"} />}
+          element={<SingleComplaintView baseUrl={baseUrl} />}
         ></Route>
       </Routes>
     </DashBoardLayout>

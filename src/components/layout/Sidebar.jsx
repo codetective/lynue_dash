@@ -1,9 +1,16 @@
-import { Box, Flex, useColorModeValue } from "@chakra-ui/react";
+import {
+  Box,
+  Flex,
+  useBreakpointValue,
+  useColorMode,
+  useColorModeValue,
+} from "@chakra-ui/react";
 import { Logo } from "../Logo";
 import NavItem from "./NavItem";
 import { FiLogOut } from "react-icons/fi";
 import { useDispatch } from "react-redux";
 import { logout } from "../../redux/features/AuthSlice";
+import { FaMoon, FaSun } from "react-icons/fa";
 
 const SidebarContent = ({
   menuItems,
@@ -13,6 +20,10 @@ const SidebarContent = ({
   baseUrl,
   ...rest
 }) => {
+  const { toggleColorMode } = useColorMode();
+  const displaySwitcher = useBreakpointValue([true, true, false, false]);
+  const switcherText = useColorModeValue("Dark Theme", "Light Theme");
+  const switcherIcon = useColorModeValue(FaMoon, FaSun);
   const dispatch = useDispatch();
   const bg = useColorModeValue("white", "gray.900");
   return (
@@ -55,6 +66,17 @@ const SidebarContent = ({
             {link.name}
           </NavItem>
         ))}
+        {displaySwitcher && (
+          <NavItem
+            noStyle
+            bg="red.200"
+            icon={switcherIcon}
+            to={"#"}
+            onClick={toggleColorMode}
+          >
+            {switcherText}
+          </NavItem>
+        )}
         <NavItem
           onClick={() => dispatch(logout())}
           bg="red.200"

@@ -44,6 +44,8 @@ export const PAGETITLE = (baseUrl, pathname) => {
       return "Complaints";
     case baseUrl + "/transactions":
       return "Transactions";
+    case baseUrl + "/notifications":
+      return "Notifications";
     default:
       return "Dashboard";
   }

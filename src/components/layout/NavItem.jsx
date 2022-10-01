@@ -8,7 +8,9 @@ const NavItem = (props) => {
   };
   return (
     <Flex
-      style={({ isActive }) => (isActive ? activeStyle : undefined)}
+      style={({ isActive }) =>
+        isActive && !props.noStyle ? activeStyle : undefined
+      }
       as={NavLink}
       to={path}
       end

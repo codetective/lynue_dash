@@ -4,8 +4,10 @@ import storage from "redux-persist/lib/storage";
 import { persistReducer, persistStore } from "redux-persist";
 import thunk from "redux-thunk";
 import AuthReducer from "./features/AuthSlice";
+import NotificationReducer from "./features/NotificationSlice";
 
 export const rootReducers = combineReducers({
+  notifications: NotificationReducer,
   auth: AuthReducer,
 });
 
@@ -13,6 +15,7 @@ const persistConfig = {
   key: "root",
   storage,
   whitelist: ["auth"],
+  // blacklist: ["notifications"],
 };
 
 const persistedReducers = persistReducer(persistConfig, rootReducers);

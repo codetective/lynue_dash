@@ -9,6 +9,7 @@ export default function PrivateRoute({ onlyFor, children }) {
   const toast = useToast();
 
   const { isAuth, user } = useSelector((state) => state.auth);
+
   const [loading, setLoading] = useState("true");
   useEffect(() => {
     setTimeout(() => {

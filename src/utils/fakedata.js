@@ -61,4 +61,13 @@ const sampleUsers = [
   },
 ];
 
-export { sampleTicketsData, sampleTransactions, sampleUsers };
+const sampleNotifs = [
+  {
+    title: "New follower from youtube",
+    message:
+      '"Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis ',
+    date: "06:00am 20-10-2009",
+  },
+];
+
+export { sampleTicketsData, sampleTransactions, sampleUsers, sampleNotifs };
