@@ -29,7 +29,7 @@ import axios from "axios";
 import HandleErr from "../../utils/axiosErrHandler";
 import cogoToast from "cogo-toast";
 
-function AddUsersModal() {
+function AddUsersModal({ reloadUsers }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [phone_number, setPhoneNumber] = useState("");
   const [image, setImage] = useState(null);
@@ -42,6 +42,7 @@ function AddUsersModal() {
   };
 
   const handleSubmit = async (e) => {
+    setLoading(true);
     e.preventDefault();
     const { email, firstname, lastname, phone, address, DOB, role, password } =
       e.target;
@@ -49,20 +50,22 @@ function AddUsersModal() {
 
     const F = new FormData();
 
-    F.append(" adminPicture  ", img);
-    F.append(" email  ", email.value);
-    F.append(" firstname  ", firstname.value);
-    F.append(" lastname ", lastname.value);
-    F.append("phoneNumber   ", phone.value);
-    F.append("  address ", address.value);
-    F.append("  DOB ", DOB.value);
-    F.append("  role ", role.value);
-    F.append("  password ", password.value);
+    F.append("adminPicture", img);
+    F.append("email", email.value);
+    F.append("firstname", firstname.value);
+    F.append("lastname", lastname.value);
+    F.append("phoneNumber", phone.value);
+    F.append("address", address.value);
+    F.append("DOB", DOB.value);
+    F.append("role", role.value);
+    F.append("password", password.value);
 
     try {
-      let result = await axios.post(API_HOSTNAME + "/admin/signup", F);
+      await axios.post(API_HOSTNAME + "/admin/signup", F);
       setLoading(false);
-      console.log(result);
+      cogoToast.success("Admin created");
+      reloadUsers();
+      onClose();
     } catch (error) {
       let msg = HandleErr(error);
       cogoToast.error(typeof msg === "string" ? msg : msg.error.message);

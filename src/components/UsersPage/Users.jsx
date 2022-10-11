@@ -76,7 +76,7 @@ function Users({ baseUrl, adminOnly }) {
               </Box>
             )}
           </SectionHeading>
-          <AddUsersModal />
+          <AddUsersModal reloadUsers={fetchUsers} />
         </HStack>
       </CustomBox>
       <Divider />
