@@ -52,7 +52,7 @@ function MetricCard({ title, icon, data, ...rest }) {
 
   return (
     <Stack style={{ margin: 0 }} {...rest} p="4" spacing="1">
-      <Icon size="xs" as={icon} />
+      <Icon size="16px" as={icon} />
       <Text
         as="small"
         fontSize="xs"

@@ -37,6 +37,10 @@ function Main() {
       <Routes>
         <Route exact path="/" element={<Overview />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/admins"
+          element={<Users baseUrl={baseUrl} adminOnly />}
+        ></Route>
         <Route path="/users" element={<Users />}></Route>
         <Route
           path="/notifications"

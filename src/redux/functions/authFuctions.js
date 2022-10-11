@@ -1,5 +1,6 @@
 import { createAsyncThunk } from "@reduxjs/toolkit";
 import axios from "axios";
+import HandleErr from "../../utils/axiosErrHandler";
 import { AUTH_API } from "../../utils/config";
 
 /**
@@ -25,15 +26,13 @@ export const signin = createAsyncThunk(
         email,
         password,
       });
+      console.log(res.data);
       return res.data;
     } catch (err) {
-      return rejectWithValue(err.message);
-    }
+      console.log(err);
 
-    // .then((res) => res.data)
-    // .catch((err) => {
-    //   return rejectwithvalue
-    // });
+      return rejectWithValue(HandleErr(err));
+    }
   }
 );
 

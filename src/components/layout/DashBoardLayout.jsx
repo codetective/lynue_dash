@@ -9,8 +9,10 @@ import {
   useColorModeValue,
   useMediaQuery,
 } from "@chakra-ui/react";
+import axios from "axios";
 import React from "react";
 import { FaBell, FaMoon, FaSun } from "react-icons/fa";
+import { useSelector } from "react-redux";
 import { Link, useLocation } from "react-router-dom";
 import { PAGETITLE } from "../../utils/config";
 import { Logo } from "../Logo";
@@ -18,6 +20,9 @@ import MobileMenu from "./MobileMenu";
 import SidebarContent from "./Sidebar";
 
 function DashBoardLayout({ navLinks, baseUrl, children }) {
+  const { token } = useSelector((s) => s.auth);
+  axios.defaults.headers.common["Authorization"] = "Bearer " + token;
+  //
   const [isLessThanLargeScreen] = useMediaQuery("(max-width: 767px)");
   const { colorMode, toggleColorMode } = useColorMode();
   const { pathname } = useLocation();

@@ -14,9 +14,8 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { login } from "../../redux/features/AuthSlice";
 // import { login } from "../../redux/features/AuthSlice";
-// import { signin } from "../../redux/functions/authFuctions";
+import { signin } from "../../redux/functions/authFuctions";
 import { Logo } from "../Logo";
 import { PasswordField } from "./PasswordField";
 
@@ -35,7 +34,7 @@ const LoginForm = () => {
       role: "superAdmin",
     };
 
-    dispatch(login(data));
+    dispatch(signin(data));
   };
 
   return (

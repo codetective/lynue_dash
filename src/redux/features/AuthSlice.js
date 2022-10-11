@@ -9,8 +9,8 @@ import {
 
 const initialState = {
   isAuth: false,
-  user: { role: "superAdmin" },
-  success: false,
+  token: null,
+  user: null,
   loading: false,
   error: "",
 };
@@ -22,14 +22,16 @@ export const AuthSlice = createSlice({
     login: (state, action) => {
       state.user = action.payload;
       state.isAuth = true;
+      state.loading = false;
     },
     logout: (state) => {
       state.isAuth = false;
+      state.token = null;
+      state.loading = false;
     },
     reset: (state) => {
       state.error = "";
       state.loading = false;
-      state.success = false;
     },
     clearError: (state) => {
       state.user = "";
@@ -43,23 +45,32 @@ export const AuthSlice = createSlice({
       .addCase(signup.fulfilled, (state, action) => {
         state.loading = false;
         state.user = action.payload;
-        state.success = true;
       })
       .addCase(signup.rejected, (state, action) => {
         cogoToast.error(action.payload, { position: "top-right" });
 
         state.loading = false;
         state.error = action.payload;
-        state.success = false;
       })
       //for login
       .addCase(signin.pending, (state) => {
         state.loading = true;
       })
       .addCase(signin.fulfilled, (state, action) => {
-        state.loading = false;
-        state.user = action.payload;
-        state.success = true;
+        // const { people: p, token } = action.payload;
+        // const user = {
+        //   name: p.userFirstname + p.userLastname,
+        //   id: p.userID,
+        //   email: p.useremail,
+        //   phone: p.userphone,
+        //   address: p.useraddress,
+        //   image: p.userpicture,
+        //   role: p.userrole,
+        // };
+        // state.user = user;
+        let token = action.payload.token;
+
+        state.token = token;
       })
       .addCase(signin.rejected, (state, action) => {
         cogoToast.error(action.payload, { position: "top-right" });

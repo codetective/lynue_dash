@@ -18,9 +18,21 @@ import {
   Input,
   Select,
 } from "@chakra-ui/react";
+import { useState } from "react";
 import SectionHeading from "../DashBoard/SectionHeading";
 
-export default function EditUserModal({ data, isOpen, onClose }) {
+export default function EditUserModal({ data, isOpen, onClose, deleteUser }) {
+  const [loading, setLoading] = useState(false);
+  const handleDelete = (id) => {
+    if (
+      window.confirm("Are you sure you wan to delete " + data.firstname + "?")
+    ) {
+      setLoading(true);
+      deleteUser(id, setLoading);
+    } else {
+      return;
+    }
+  };
   return (
     <>
       <Modal
@@ -38,25 +50,41 @@ export default function EditUserModal({ data, isOpen, onClose }) {
           <ModalCloseButton color="white" />
           <ModalBody py="30px">
             <Stack spacing="5">
-              <HStack>
+              <HStack justify="space-between">
                 <HStack spacing="5">
-                  <Avatar size="sm" src={data.image} name={data.name} />
+                  <Avatar
+                    size="sm"
+                    src={data.picture}
+                    name={data.firstname + " " + data.lastname}
+                  />
                   <Box>
-                    <Text fontSize={"lg"}>{data.name}</Text>
+                    <Text fontSize={"lg"}>
+                      {data.firstname + " " + data.lastname}
+                    </Text>
+                    <Text fontSize={"sm"} as="small">
+                      {data.email} | {data.phone}
+                    </Text>
                     <Text fontSize={"sm"} as="small">
                       {data.id}
                     </Text>
                   </Box>
                 </HStack>
-                <Text color="blue.500">{data.role}</Text>
+                <Text textAlign={"right"} color="blue.500">
+                  {data.role}
+                </Text>
               </HStack>
-              <SectionHeading fontSize="xl"> Chose action: </SectionHeading>
+              <SectionHeading fontSize="xl"> Choose action: </SectionHeading>
 
               <SimpleGrid columns={2} spacing="8">
                 <Button px="10">Suspend User</Button>
                 <Button px="10">Block User</Button>
                 <Button px="10">Disable User</Button>
-                <Button px="10" colorScheme={"red"}>
+                <Button
+                  isLoading={loading}
+                  px="10"
+                  colorScheme={"red"}
+                  onClick={() => handleDelete(data._id)}
+                >
                   Delete User
                 </Button>
               </SimpleGrid>

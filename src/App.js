@@ -9,8 +9,21 @@ import AdminDashBoard from "./pages/AdminDashBoard";
 import AnalystDashBoard from "./pages/AnalystDashBoard";
 import PrivateRoute from "./components/Auth/PrivateRoute";
 import { roles } from "./utils/config";
+import { useCallback, useEffect } from "react";
+import { HANDLEJWT } from "./utils/helper";
+import { useDispatch, useSelector } from "react-redux";
 
 function App() {
+  const dispatch = useDispatch();
+  const { token } = useSelector((s) => s.auth);
+
+  const calH = useCallback(() => {
+    HANDLEJWT(token, dispatch);
+  }, [token, dispatch]);
+
+  useEffect(() => {
+    calH();
+  }, [token, calH]);
   return (
     <ChakraProvider theme={appTheme}>
       <Box>
@@ -27,7 +40,7 @@ function App() {
           <Route
             path="/superadmin/*"
             element={
-              <PrivateRoute onlyFor={roles.superAdmin.title}>
+              <PrivateRoute onlyFor={roles.superadmin.title}>
                 <SuperAdminDashBoard />
               </PrivateRoute>
             }

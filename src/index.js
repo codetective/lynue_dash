@@ -12,18 +12,16 @@ import appTheme from "./utils/apptheme";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
 root.render(
-  <React.StrictMode>
-    <BrowserRouter>
-      <Provider store={store}>
-        <PersistGate loading={<h1>loading..</h1>} persistor={persistor}>
-          <ColorModeScript
-            initialColorMode={appTheme.config.initialColorMode}
-          />
-          <App />
-        </PersistGate>
-      </Provider>
-    </BrowserRouter>
-  </React.StrictMode>
+  // <React.StrictMode>
+  <BrowserRouter>
+    <Provider store={store}>
+      <PersistGate loading={<h1>loading..</h1>} persistor={persistor}>
+        <ColorModeScript initialColorMode={appTheme.config.initialColorMode} />
+        <App />
+      </PersistGate>
+    </Provider>
+  </BrowserRouter>
+  // </React.StrictMode>
 );
 
 // If you want to start measuring performance in your app, pass a function

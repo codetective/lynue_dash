@@ -18,7 +18,7 @@ import React, { useState } from "react";
 import CustomBox from "../DashBoard/CustomBox";
 import EditUserModal from "./EditUserModal";
 
-function UsersTable({ usersData, baseUrl }) {
+function UsersTable({ usersData, baseUrl, deleteUser }) {
   const { isOpen, onOpen, onClose } = useDisclosure();
   const [selectedUser, setSelectedUser] = useState(undefined);
 
@@ -47,11 +47,17 @@ function UsersTable({ usersData, baseUrl }) {
                 <Td w="fit-content" pl="3" pr="0">
                   {indx + 1}
                 </Td>
-                <Td as={HStack} spacing="3">
-                  <Avatar size="sm" src={data.image} name={data.name} />
-                  <Text>{data.name}</Text>
+                <Td>
+                  <HStack spacing="3">
+                    <Avatar
+                      size="sm"
+                      src={data.image}
+                      name={data.firstname + " " + data.lastname}
+                    />
+                    <Text>{data.firstname + " " + data.lastname}</Text>
+                  </HStack>
                 </Td>
-                <Td>{data.id}</Td>
+                <Td>{String(data._id).slice(0, 6) + "..."}</Td>
                 <Td textTransform={"capitalize"}>{data.role}</Td>
 
                 <Td>
@@ -74,7 +80,12 @@ function UsersTable({ usersData, baseUrl }) {
         </Table>
       </TableContainer>
       {selectedUser && (
-        <EditUserModal data={selectedUser} isOpen={isOpen} onClose={onClose} />
+        <EditUserModal
+          data={selectedUser}
+          isOpen={isOpen}
+          onClose={onClose}
+          deleteUser={deleteUser}
+        />
       )}
     </CustomBox>
   );

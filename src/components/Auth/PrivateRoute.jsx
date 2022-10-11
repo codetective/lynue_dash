@@ -14,7 +14,7 @@ export default function PrivateRoute({ onlyFor, children }) {
   useEffect(() => {
     setTimeout(() => {
       setLoading(false);
-    }, 1500);
+    }, 1000);
   }, []);
 
   if (!isAuth && !loading) {

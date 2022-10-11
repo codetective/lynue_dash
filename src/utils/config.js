@@ -1,7 +1,7 @@
 export const API_HOSTNAME = "http://localhost:5000";
 
 export const AUTH_API = {
-  login: `${API_HOSTNAME}/auth/login`,
+  login: `${API_HOSTNAME}/admin/login`,
   signup: `${API_HOSTNAME}/auth/signup`,
   reset_password: `${API_HOSTNAME}/auth/reset_password`,
   new_password: `${API_HOSTNAME}/auth/new_password`,
@@ -9,8 +9,8 @@ export const AUTH_API = {
 };
 
 export const roles = {
-  superAdmin: {
-    title: "superAdmin",
+  superadmin: {
+    title: "superadmin",
     path: "/superadmin",
   },
   admin: {
