@@ -28,7 +28,7 @@ export default function EditUserModal({ data, isOpen, onClose, deleteUser }) {
       window.confirm("Are you sure you wan to delete " + data.firstname + "?")
     ) {
       setLoading(true);
-      deleteUser(id, setLoading);
+      deleteUser(id, setLoading, onClose);
     } else {
       return;
     }

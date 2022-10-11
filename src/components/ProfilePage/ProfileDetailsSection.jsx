@@ -12,11 +12,11 @@ import CustomBox from "../DashBoard/CustomBox";
 import PhoneNumberInput from "../DashBoard/PhoneNumberInput";
 import SectionHeading from "../DashBoard/SectionHeading";
 
+export const countryOptions = COUNTRIES.map(({ name, iso }) => ({
+  label: name,
+  value: iso,
+}));
 function ProfileDetailsSection() {
-  const countryOptions = COUNTRIES.map(({ name, iso }) => ({
-    label: name,
-    value: iso,
-  }));
   const [phone_number, setPhoneNumber] = useState("");
   return (
     <CustomBox flex="2" mr={[0, 0, 5]}>

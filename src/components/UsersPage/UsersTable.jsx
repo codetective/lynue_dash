@@ -51,7 +51,7 @@ function UsersTable({ usersData, baseUrl, deleteUser }) {
                   <HStack spacing="3">
                     <Avatar
                       size="sm"
-                      src={data.image}
+                      src={data.picture}
                       name={data.firstname + " " + data.lastname}
                     />
                     <Text>{data.firstname + " " + data.lastname}</Text>

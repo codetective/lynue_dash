@@ -16,6 +16,7 @@ import { API_HOSTNAME } from "../../utils/config";
 import HandleErr from "../../utils/axiosErrHandler";
 import cogoToast from "cogo-toast";
 import AlertComponent from "../AlertComponent";
+import AddUsersModal from "./AddUsersModal";
 
 function Users({ baseUrl, adminOnly }) {
   const [type, setType] = useState("all");
@@ -40,11 +41,16 @@ function Users({ baseUrl, adminOnly }) {
     }
   }, [url]);
 
-  const deleteUser = async (id, cancelLoad) => {
+  const deleteUser = async (id, cancelLoad, closeModal) => {
     try {
       let result = await axios.delete(API_HOSTNAME + url + "/" + id);
-      console.log(result);
       cancelLoad(false);
+      setUsers((prev) =>
+        prev.filter((user) => {
+          return user._id !== result.data.id;
+        })
+      );
+      closeModal();
     } catch (error) {
       let msg = HandleErr(error);
       cogoToast.error(typeof msg === "string" ? msg : msg.error.message);
@@ -59,16 +65,19 @@ function Users({ baseUrl, adminOnly }) {
   return (
     <Box>
       <CustomBox>
-        <SectionHeading fontWeight="semibold" fontSize={["md", "lg", "xl"]}>
-          {" "}
-          {adminOnly && type === "all" ? (
-            "ADMINISTRATIVE USERS"
-          ) : (
-            <Box as="span" textTransform={"uppercase"}>
-              {type} USERS
-            </Box>
-          )}
-        </SectionHeading>
+        <HStack justify="space-between">
+          <SectionHeading fontWeight="semibold" fontSize={["md", "lg", "xl"]}>
+            {" "}
+            {adminOnly && type === "all" ? (
+              "ADMINISTRATIVE USERS"
+            ) : (
+              <Box as="span" textTransform={"uppercase"}>
+                {type} USERS
+              </Box>
+            )}
+          </SectionHeading>
+          <AddUsersModal />
+        </HStack>
       </CustomBox>
       <Divider />
 

@@ -88,7 +88,6 @@ export default function PhoneNumberInput({
         pl="4rem"
         type="tel"
         value={number}
-        pattern="[0-9]"
         placeholder={placeholder}
         onChange={onPhoneNumberChange}
         name="phone"
