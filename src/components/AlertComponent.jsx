@@ -16,7 +16,10 @@ function AlertComponent({ message, status, action = null }) {
       alignItems="center"
       justifyContent="center"
       textAlign="center"
-      height="200px"
+      height="fit-content"
+      width={"fit-content"}
+      rounded="30px"
+      shadow="base"
     >
       <AlertIcon boxSize="40px" mr={0} />
       <AlertTitle mt={4} mb={1} fontSize="lg">

@@ -12,6 +12,7 @@ import { roles } from "./utils/config";
 import { useCallback, useEffect } from "react";
 import { HANDLEJWT } from "./utils/helper";
 import { useDispatch, useSelector } from "react-redux";
+import ErrorPage from "./pages/ErrorPage";
 
 function App() {
   const dispatch = useDispatch();
@@ -29,6 +30,7 @@ function App() {
       <Box>
         <Routes>
           <Route path="/" element={<WelcomePage />}></Route>
+          <Route path="/error" element={<ErrorPage />}></Route>
           <Route
             path="/blog/*"
             element={
