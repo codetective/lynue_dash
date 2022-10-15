@@ -117,7 +117,7 @@ function Users({ baseUrl, adminOnly }) {
         />
       )}
       {loading && (
-        <Center minH="40vh" bg="gray.50">
+        <Center minH="40vh">
           <Spinner size="xl" />
         </Center>
       )}

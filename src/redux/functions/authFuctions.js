@@ -29,8 +29,6 @@ export const signin = createAsyncThunk(
       console.log(res.data);
       return res.data;
     } catch (err) {
-      console.log(err);
-
       return rejectWithValue(HandleErr(err));
     }
   }

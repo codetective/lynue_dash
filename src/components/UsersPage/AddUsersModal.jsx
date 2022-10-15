@@ -9,6 +9,7 @@ import {
   Select,
   Stack,
   Text,
+  useColorModeValue,
   useDisclosure,
 } from "@chakra-ui/react";
 import React, { useState } from "react";
@@ -106,7 +107,7 @@ function AddUsersModal({ reloadUsers }) {
                   flexDir="column"
                   height="200px"
                   w="full"
-                  bg="gray.100"
+                  bg={useColorModeValue("gray.100", "gray.900")}
                 >
                   {!image && (
                     <>

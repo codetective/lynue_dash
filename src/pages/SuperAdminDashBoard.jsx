@@ -15,6 +15,7 @@ import Users from "../components/UsersPage/Users";
 import Notifications from "../components/NotificationsPage/Notifications";
 import { useEffect } from "react";
 import { getNotifs } from "../redux/functions/notificationFunctions";
+import Listings from "../components/ListingsPage/Listings";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -37,6 +38,14 @@ function Main() {
       <Routes>
         <Route exact path="/" element={<Overview />}></Route>
         <Route path="/profile" element={<Profile />}></Route>
+        <Route
+          path="/listings"
+          element={<Listings baseUrl={baseUrl} />}
+        ></Route>
+        <Route
+          path="/listings/rent"
+          element={<Listings type="rent" baseUrl={baseUrl} />}
+        ></Route>
         <Route
           path="/admins"
           element={<Users baseUrl={baseUrl} adminOnly />}

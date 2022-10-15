@@ -17,7 +17,7 @@ function AlertComponent({ message, status, action = null }) {
       justifyContent="center"
       textAlign="center"
       height="fit-content"
-      width={"fit-content"}
+      width={"full"}
       rounded="30px"
       shadow="base"
     >
