@@ -58,9 +58,16 @@ function Users({ baseUrl, adminOnly }) {
     }
   };
 
+  const ResetType = useCallback(() => {
+    if (!adminOnly) {
+      setType("all");
+    }
+  }, [adminOnly]);
+
   useEffect(() => {
+    ResetType();
     fetchUsers();
-  }, [fetchUsers]);
+  }, [fetchUsers, ResetType]);
 
   return (
     <Box>
@@ -76,7 +83,7 @@ function Users({ baseUrl, adminOnly }) {
               </Box>
             )}
           </SectionHeading>
-          <AddUsersModal reloadUsers={fetchUsers} />
+          {adminOnly && <AddUsersModal reloadUsers={fetchUsers} />}
         </HStack>
       </CustomBox>
       <Divider />

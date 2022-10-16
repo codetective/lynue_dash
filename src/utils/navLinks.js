@@ -45,11 +45,11 @@ const super_admin_nav_links = [
     name: "Complaints",
     icon: GoIssueOpened,
   },
-  {
-    path: "/superadmin/messages",
-    name: "Messages",
-    icon: TiMessages,
-  },
+  // {
+  //   path: "/superadmin/messages",
+  //   name: "Messages",
+  //   icon: TiMessages,
+  // },
   {
     path: "/superadmin/settings",
     name: "Settings",
@@ -156,23 +156,39 @@ const admin_nav_links = [
     name: "Home",
     icon: MdHome,
   },
+
   {
-    path: "/admin/articles",
-    name: "Articles",
-    icon: FaRss,
-  },
-  {
-    path: "/admin/collection",
-    name: "Collection",
+    path: "/admin/users",
+    name: "Users",
     icon: HiCollection,
   },
+  {
+    path: "/admin/transactions",
+    name: "Transactions",
+    icon: AiOutlineTransaction,
+  },
+  {
+    path: "/admin/listings",
+    name: "Listings",
+    icon: FaClipboardCheck,
+  },
+  {
+    path: "/admin/complaints",
+    name: "Complaints",
+    icon: GoIssueOpened,
+  },
+  // {
+  //   path: "/admin/messages",
+  //   name: "Messages",
+  //   icon: TiMessages,
+  // },
   {
     path: "/admin/settings",
     name: "Settings",
     icon: BsGearFill,
   },
   {
-    path: "/superadmin/profile",
+    path: "/admin/profile",
     name: "Profile",
     icon: FaUserCircle,
   },

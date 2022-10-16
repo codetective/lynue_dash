@@ -28,7 +28,6 @@ export const NotificationSlice = createSlice({
       .addCase(getNotifs.fulfilled, (state, action) => {
         state.loading = false;
         state.notifications = action.payload;
-        console.log(action);
       })
       .addCase(getNotifs.rejected, (state, action) => {
         cogoToast.error(action.payload, { position: "top-right" });

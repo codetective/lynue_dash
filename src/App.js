@@ -13,6 +13,7 @@ import { useCallback, useEffect } from "react";
 import { HANDLEJWT } from "./utils/helper";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorPage from "./pages/ErrorPage";
+import ForgotPassword from "./components/Auth/ForgotPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -30,6 +31,7 @@ function App() {
       <Box>
         <Routes>
           <Route path="/" element={<WelcomePage />}></Route>
+          <Route path="/forgot-password" element={<ForgotPassword />}></Route>
           <Route path="/error" element={<ErrorPage />}></Route>
           <Route
             path="/blog/*"

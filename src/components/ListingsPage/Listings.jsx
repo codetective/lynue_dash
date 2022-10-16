@@ -35,7 +35,6 @@ function Listings({ type = "sale", baseUrl }) {
     setError(false);
     try {
       let result = await axios.get(API_HOSTNAME + url);
-      console.log(result);
       setListings(result.data);
       setLoading(false);
     } catch (error) {
@@ -68,11 +67,11 @@ function Listings({ type = "sale", baseUrl }) {
               </Box>
             )}
           </SectionHeading>
-          <Button colorScheme={"blue"}>
-            <Link to={type === "sale" ? "rent" : baseUrl + "/listings"}>
+          <Link to={type === "sale" ? "rent" : baseUrl + "/listings"}>
+            <Button colorScheme={"blue"}>
               {type === "sale" ? "See Rent Listings" : "See Sale Listings"}
-            </Link>
-          </Button>
+            </Button>
+          </Link>
         </HStack>
       </CustomBox>
       <Divider />

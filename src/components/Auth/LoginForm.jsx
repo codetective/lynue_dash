@@ -14,6 +14,7 @@ import {
 } from "@chakra-ui/react";
 import * as React from "react";
 import { useDispatch, useSelector } from "react-redux";
+import { Link } from "react-router-dom";
 // import { login } from "../../redux/features/AuthSlice";
 import { signin } from "../../redux/functions/authFuctions";
 import { Logo } from "../Logo";
@@ -74,7 +75,13 @@ const LoginForm = () => {
               <PasswordField name="password" />
             </Stack>
             <HStack justify="space-between">
-              <Button variant="link" colorScheme="blue" size="sm">
+              <Button
+                variant="link"
+                as={Link}
+                to="/forgot-password"
+                colorScheme="blue"
+                size="sm"
+              >
                 Forgot password?
               </Button>
             </HStack>

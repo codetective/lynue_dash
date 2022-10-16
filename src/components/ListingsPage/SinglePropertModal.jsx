@@ -9,60 +9,88 @@ import {
   ModalCloseButton,
   Button,
   Box,
-  Image,
   Text,
   Flex,
-  SimpleGrid,
-  useColorModeValue,
   Center,
   Spinner,
   Badge,
   Stack,
-  Avatar,
-  Heading,
   HStack,
-  Icon,
-  UnorderedList,
-  ListItem,
+  useToast,
 } from "@chakra-ui/react";
 import HandleErr from "../../utils/axiosErrHandler";
-import cogoToast from "cogo-toast";
 import { API_HOSTNAME } from "../../utils/config";
 import axios from "axios";
 import AlertComponent from "../AlertComponent";
-import CustomBox from "../DashBoard/CustomBox";
-import { FaBath, FaBed } from "react-icons/fa";
-import { TbDimensions } from "react-icons/tb";
-import { FcCheckmark } from "react-icons/fc";
-import SectionHeading from "../DashBoard/SectionHeading";
+import ImagesBox from "./ImagesBox";
+import BedBathSizeSection from "./BedBathSizeSection";
+import PropertyDetails from "./PropertyDetails";
+import UserDetails from "./UserDetails";
 
 function SinglePropertModal({ activeItem, isOpen, onClose, type }) {
-  const [activeImageIndex, setActiveImageIndex] = useState(0);
+  const toast = useToast();
   const [listing, setListing] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [verifying, setVerifying] = useState(false);
   const [error, setError] = useState(false);
+  const verifyUrl =
+    type === "sale"
+      ? `/changeStatus/sell/${activeItem._id}`
+      : `/changeStatus/${activeItem._id}`;
   const url =
     type === "sale"
       ? `/admin/sell/property/${activeItem._id}`
       : `/admin/rent/property/${activeItem._id}`;
 
-  const bg = useColorModeValue("gray.100", "gray.700");
   const fetchSingleItem = useCallback(async () => {
+    if (!isOpen) return;
     setLoading(true);
     setListing([]);
     setError(false);
     try {
       let result = await axios.get(API_HOSTNAME + url);
-      console.log(result);
       setListing(result.data);
       setLoading(false);
     } catch (error) {
       let msg = HandleErr(error);
-      cogoToast.error(typeof msg === "string" ? msg : msg.error.message);
+      toast({
+        status: "error",
+        title: "An error occurred",
+        description: typeof msg === "string" ? msg : msg.error.message,
+        duration: 5,
+        isClosable: true,
+        position: "bottom-right",
+      });
       setError(typeof msg === "string" ? msg : msg.error.message);
       setLoading(false);
     }
-  }, [url]);
+  }, [url, isOpen, toast]);
+
+  const verifyListing = async () => {
+    setVerifying(true);
+    try {
+      await axios.get(API_HOSTNAME + verifyUrl);
+      toast({
+        status: "success",
+        title: "Request Successful",
+        description: "Property has been verified",
+        isClosable: true,
+        position: "bottom-right",
+      });
+      fetchSingleItem();
+      setVerifying(false);
+    } catch (error) {
+      let msg = HandleErr(error);
+      toast({
+        status: "error",
+        title: "An error occurred",
+        description: typeof msg === "string" ? msg : msg.error.message,
+        isClosable: true,
+        position: "bottom-right",
+      });
+      setVerifying(false);
+    }
+  };
 
   useEffect(() => {
     fetchSingleItem();
@@ -80,7 +108,7 @@ function SinglePropertModal({ activeItem, isOpen, onClose, type }) {
         <ModalOverlay />
         <ModalContent>
           <ModalHeader>
-            Viewing item : #{activeItem.regNumber}{" "}
+            Viewing item : #{activeItem.regNumber} for {type}
             {loading && (
               <Center flexDir="column">
                 <Spinner size="sm" />
@@ -90,44 +118,22 @@ function SinglePropertModal({ activeItem, isOpen, onClose, type }) {
           </ModalHeader>
           <ModalCloseButton />
           <ModalBody>
-            {activeItem.display_image && activeItem.display_image.length !== 0 && (
+            {listing && !loading && (
               <Flex
                 gap="5"
                 flexDir={["column-reverse", "column-reverse", "row"]}
               >
                 <Stack spacing="5" w={["full", "full", "60%"]}>
                   <Box>
-                    <Box h="300px" bg={bg}>
-                      <Image
-                        h="full"
-                        w="full"
-                        objectFit={"cover"}
-                        src={activeItem.display_image[activeImageIndex].url}
-                      />
-                    </Box>
-                    <SimpleGrid
-                      spacing="1"
-                      columns={activeItem.display_image.length}
-                      py="2"
-                    >
-                      {activeItem.display_image.map((img, i) => (
-                        <Box
-                          height={["60px", "100px"]}
-                          _hover={{
-                            border: "2px solid green",
-                          }}
-                          key={i}
-                        >
-                          <Image
-                            onClick={() => setActiveImageIndex(i)}
-                            objectFit={"cover"}
-                            h="full"
-                            w="full"
-                            src={img.url}
-                          />
-                        </Box>
-                      ))}
-                    </SimpleGrid>
+                    <ImagesBox images={listing.display_image} />
+                    {listing && (
+                      <Box>
+                        {(!listing.display_image ||
+                          listing.display_image.length === 0) && (
+                          <Text fontSize={"2xl"}>No images posted</Text>
+                        )}
+                      </Box>
+                    )}
                     <HStack
                       justifyContent={"space-between"}
                       spacing="3"
@@ -148,102 +154,16 @@ function SinglePropertModal({ activeItem, isOpen, onClose, type }) {
                         ₦{Intl.NumberFormat("en-US").format(listing?.price)}
                       </Text>
                     </HStack>
-                    <HStack
-                      flexWrap={"wrap"}
-                      style={{ marginBlock: "0", marginInline: "0" }}
-                    >
-                      <HStack spacing="1" pr="4">
-                        <Icon fontSize="18px" my="2" as={FaBed} />
-                        <Text textTransform={"capitalize"} fontSize="sm">
-                          {listing?.bedroom}
-                        </Text>
-                      </HStack>
-                      <HStack
-                        spacing="1"
-                        pr="4"
-                        style={{ marginBlock: "0", marginInline: "0" }}
-                      >
-                        <Icon fontSize="18px" my="2" as={FaBath} />
-                        <Text textTransform={"capitalize"} fontSize="sm">
-                          {listing?.bathroom}
-                        </Text>
-                      </HStack>
-                      <HStack
-                        spacing="1"
-                        pr="4"
-                        style={{ marginBlock: "0", marginInline: "0" }}
-                      >
-                        <Icon fontSize="18px" my="2" as={TbDimensions} />
-                        <Text textTransform={"capitalize"} fontSize="sm">
-                          {listing?.interior_size}
-                        </Text>
-                      </HStack>
-                    </HStack>
+                    <BedBathSizeSection
+                      bedroom={listing.bedroom}
+                      bathroom={listing.bathroom}
+                      interior_size={listing.interior_size}
+                    />
                   </Box>
-                  {/* desc box */}
-                  <Box>
-                    <SectionHeading fontWeight="bold" fontSize="xl">
-                      Description
-                    </SectionHeading>
-                    <Text>{listing?.description}</Text>
-                  </Box>
-                  {/* amenities */}
-                  <Box>
-                    <SectionHeading fontWeight="bold" fontSize="xl">
-                      Amenities
-                    </SectionHeading>
-                    <SimpleGrid columns={[1, 2, 3]} spacing="5">
-                      {listing?.amenities?.length > 0 &&
-                        listing.amenities.map((a, i) => (
-                          <HStack key={i}>
-                            <Icon as={FcCheckmark} />
-                            <Text>{a}</Text>
-                          </HStack>
-                        ))}
-                    </SimpleGrid>
-                  </Box>
-                  {/* produc details */}
-                  <Box>
-                    <SectionHeading fontWeight="bold" fontSize="xl">
-                      Property Details
-                    </SectionHeading>
-                    <Stack spacing="5">
-                      <Box>
-                        <Text>
-                          * Condition :{" "}
-                          <UnorderedList pl="10">
-                            {listing.condition?.map((c, i) => (
-                              <ListItem p="1" key={i}>
-                                {c}
-                              </ListItem>
-                            ))}
-                          </UnorderedList>
-                        </Text>
-                      </Box>
-                      <Box>
-                        <Text>
-                          * Furnishing? : <br />
-                          <Box pl="10" as="span">
-                            {listing.isFurnished
-                              ? "Property is furnished"
-                              : "Property is not furnished"}
-                          </Box>
-                        </Text>
-                      </Box>
-                    </Stack>
-                    {/* <SimpleGrid columns={[1, 2, 3]} spacing="5">
-                      {listing?.amenities?.length > 0 &&
-                        listing.amenities.map((a, i) => (
-                          <HStack key={i}>
-                            <Icon as={FcCheckmark} />
-                            <Text>{a}</Text>
-                          </HStack>
-                        ))}
-                    </SimpleGrid> */}
-                  </Box>
+                  <PropertyDetails listing={listing} />
                 </Stack>
-                {/* user deatils box */}
                 <Box w={["full", "full", "40%"]}>
+                  {" "}
                   {!loading && error && (
                     <AlertComponent
                       status={"error"}
@@ -255,65 +175,27 @@ function SinglePropertModal({ activeItem, isOpen, onClose, type }) {
                       }
                     />
                   )}
-                  <Stack spacing="5">
-                    <Badge
-                      fontSize={"2xl"}
-                      px="4"
-                      py="3"
-                      variant="outline"
-                      rounded="lg"
-                      color="black"
-                      m="auto"
-                    >
-                      <Flex flexWrap={"wrap"}>
-                        ₦{Intl.NumberFormat("en-US").format(listing?.price)}
-                        <Text as="small" fontSize="sm">
-                          ({listing?.duration})
-                        </Text>
-                      </Flex>
-                    </Badge>
-
-                    <CustomBox>
-                      <Center flexDir="column">
-                        <Avatar
-                          size="xl"
-                          // name={
-                          //   listing.user && listing.user.firstname
-                          //     ? listing.user.firstname +
-                          //       " " +
-                          //       listing.user.lastname
-                          //     : "John Doe"
-                          // }
-                          name="John doe"
-                        />
-                        <Heading fontSize="2xl" as="h2" pt="1">
-                          John Doe
-                        </Heading>
-
-                        <Text as="small">email@email.com</Text>
-                      </Center>
-                    </CustomBox>
-                  </Stack>
+                  <UserDetails listing={listing} />
                 </Box>
               </Flex>
             )}
-
-            <Box>
-              {!activeItem.display_image &&
-                activeItem.display_image.length === 0 && (
-                  <Text fontSize={"2xl"}>No images posted</Text>
-                )}
-            </Box>
           </ModalBody>
 
           <ModalFooter>
             <Button colorScheme="red" mr={3} onClick={onClose}>
               Close
             </Button>
-            {activeItem.verified ? (
+            {listing && listing.verified ? (
               <Button disabled>Verified</Button>
             ) : (
-              <Button colorScheme={"green"}>Verify Listing</Button>
+              <Button
+                onClick={verifyListing}
+                disabled={verifying}
+                isLoading={verifying}
+                colorScheme={"green"}
+              >
+                Verify Listing
+              </Button>
             )}
           </ModalFooter>
         </ModalContent>
