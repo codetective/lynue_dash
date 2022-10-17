@@ -16,6 +16,7 @@ import Users from "../components/UsersPage/Users";
 import Notifications from "../components/NotificationsPage/Notifications";
 
 import Listings from "../components/ListingsPage/Listings";
+import NotFound from "./NotFound";
 
 function AdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -61,6 +62,7 @@ function Main() {
           path="/complaints/:ticketID"
           element={<SingleComplaintView baseUrl={baseUrl} />}
         ></Route>
+        <Route path={"*"} element={<NotFound />}></Route>
       </Routes>
     </DashBoardLayout>
   );

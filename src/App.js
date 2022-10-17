@@ -14,6 +14,8 @@ import { HANDLEJWT } from "./utils/helper";
 import { useDispatch, useSelector } from "react-redux";
 import ErrorPage from "./pages/ErrorPage";
 import ForgotPassword from "./components/Auth/ForgotPassword";
+import NotFound from "./pages/NotFound";
+import ResetPassword from "./components/Auth/ResetPassword";
 
 function App() {
   const dispatch = useDispatch();
@@ -32,6 +34,10 @@ function App() {
         <Routes>
           <Route path="/" element={<WelcomePage />}></Route>
           <Route path="/forgot-password" element={<ForgotPassword />}></Route>
+          <Route
+            path="/reset-password/:id/:token"
+            element={<ResetPassword />}
+          ></Route>
           <Route path="/error" element={<ErrorPage />}></Route>
           <Route
             path="/blog/*"
@@ -73,7 +79,7 @@ function App() {
               </PrivateRoute>
             }
           ></Route>
-          <Route path={"*"} element={<h1>PAGE NOT FOUND</h1>}></Route>
+          <Route path={"*"} element={<NotFound />}></Route>
         </Routes>
       </Box>
     </ChakraProvider>

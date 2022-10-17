@@ -27,6 +27,10 @@ function AlertComponent({ message, status, action = null }) {
           ? "Something went wrong"
           : status === "success"
           ? "Request successful"
+          : status === "info"
+          ? "Request successful"
+          : status === "warning"
+          ? "Warning!"
           : "Something is not right"}
       </AlertTitle>
       <AlertDescription maxWidth="sm">{message}</AlertDescription>

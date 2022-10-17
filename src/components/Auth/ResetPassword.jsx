@@ -1,36 +1,44 @@
 import {
   Box,
   Button,
+  Center,
   Container,
   Flex,
-  FormControl,
-  FormLabel,
   Heading,
-  Input,
+  Spinner,
   Stack,
   useBreakpointValue,
   useColorModeValue,
 } from "@chakra-ui/react";
 import axios from "axios";
 import * as React from "react";
+import { useEffect } from "react";
+import { useParams } from "react-router-dom";
 import HandleErr from "../../utils/axiosErrHandler";
 import { API_HOSTNAME } from "../../utils/config";
 import AlertComponent from "../AlertComponent";
 import { Logo } from "../Logo";
+import { PasswordField } from "./PasswordField";
+import jwt_decode from "jwt-decode";
 
-const ForgotPassword = () => {
+const ResetPassword = () => {
   const [loading, setLoading] = React.useState(false);
+  const [checking, setChecking] = React.useState(true);
   const [sent, setSent] = React.useState(false);
-  let url = "/admin/forgot_password";
+  const [exp, setExp] = React.useState(false);
+  let url = "/admin/new_password";
+
+  const { id, token } = useParams();
 
   const handleSubmit = async (e) => {
     //form submission handling
     e.preventDefault();
     setLoading(true);
-    const { email } = e.target;
+    const { password } = e.target;
     let data = {
-      email: email.value,
-      url: window.location.origin + "/reset-password",
+      password: password.value,
+      id,
+      token,
     };
     try {
       await axios.post(API_HOSTNAME + url, data);
@@ -42,6 +50,26 @@ const ForgotPassword = () => {
       setLoading(false);
     }
   };
+
+  const CheckExp = React.useCallback(() => {
+    try {
+      let TODAY = Date.now();
+      const decoded = jwt_decode(token);
+      let JWT_DATE = new Date(decoded.exp * 1000);
+      if (JWT_DATE < TODAY) {
+        setExp(true);
+        return setChecking(false);
+      }
+      setChecking(false);
+    } catch (err) {
+      setExp(true);
+      setChecking(false);
+    }
+  }, [token]);
+
+  useEffect(() => {
+    CheckExp();
+  }, [CheckExp]);
 
   return (
     <Container
@@ -56,7 +84,7 @@ const ForgotPassword = () => {
           </Flex>
           <Stack spacing={{ base: "2", md: "3" }} textAlign="center">
             <Heading size={useBreakpointValue({ base: "xs", md: "sm" })}>
-              Forgot Password ?
+              Reset your password
             </Heading>
           </Stack>
         </Stack>
@@ -71,29 +99,46 @@ const ForgotPassword = () => {
           w={["90%", "initial"]}
           alignSelf={["center", "initial"]}
         >
-          {!sent && (
+          {!sent && !exp && !checking && (
             <Stack spacing="6">
               <Stack spacing="5">
-                <FormControl>
-                  <FormLabel htmlFor="email">Enter email to reset</FormLabel>
-                  <Input id="email" name="email" type="email" required />
-                </FormControl>
+                <PasswordField name="password" />
               </Stack>
 
               <Stack spacing="6">
                 <Button isLoading={loading} type="submit" colorScheme="blue">
-                  Reset Password
+                  Change Password
                 </Button>
               </Stack>
             </Stack>
           )}
+          {checking && (
+            <Center>
+              <Spinner size="xl" />
+            </Center>
+          )}
 
           {sent && (
             <AlertComponent
-              message={
-                "We sent you an email, check your mail for further instructions"
+              message={"Your password has been changed, proceed to login"}
+              status="info"
+              action={
+                <Button as="a" href="/">
+                  Login
+                </Button>
               }
-              status="success"
+            />
+          )}
+
+          {!checking && exp && (
+            <AlertComponent
+              message={"This link has expired."}
+              status="error"
+              action={
+                <Button as="a" href="/forgot-password">
+                  Get new Link
+                </Button>
+              }
             />
           )}
         </Box>
@@ -102,4 +147,4 @@ const ForgotPassword = () => {
   );
 };
 
-export default ForgotPassword;
+export default ResetPassword;

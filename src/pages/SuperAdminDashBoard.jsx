@@ -16,6 +16,7 @@ import Notifications from "../components/NotificationsPage/Notifications";
 import { useEffect } from "react";
 import { getNotifs } from "../redux/functions/notificationFunctions";
 import Listings from "../components/ListingsPage/Listings";
+import NotFound from "./NotFound";
 
 function SuperAdminDashBoard() {
   const { isAuth } = useSelector((state) => state.auth);
@@ -72,6 +73,7 @@ function Main() {
           path="/complaints/:ticketID"
           element={<SingleComplaintView baseUrl={baseUrl} />}
         ></Route>
+        <Route path={"*"} element={<NotFound />}></Route>
       </Routes>
     </DashBoardLayout>
   );
